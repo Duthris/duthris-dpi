@@ -46,11 +46,11 @@ nsis:
 portable:
   artifactName: Duthris-DPI-Portable-${version}.${ext}
 
-# Releases and the auto-updater both live on GitHub. The release workflow runs
-# electron-builder with --publish always; local builds use --publish never.
+# Where the auto-updater looks for new versions (written into app-update.yml).
+# Builds always run with --publish never; the release workflow uploads the
+# files itself with gh, in one step.
 publish:
   provider: github
   owner: Duthris
   repo: duthris-dpi
-  # Publish straight to a visible release; the default leaves it as a draft.
   releaseType: release

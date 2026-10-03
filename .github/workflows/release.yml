@@ -11,11 +11,11 @@ jobs:
   windows:
     runs-on: windows-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - uses: pnpm/action-setup@v4
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v5
         with:
           node-version: 24
           cache: pnpm
@@ -40,9 +40,18 @@ jobs:
       - name: Typecheck, lint and build
         run: pnpm run verify
 
-      # Uploads the installer, the portable exe and latest.yml (read by the
-      # auto-updater) to the release for this tag.
-      - name: Package and publish
-        run: pnpm exec electron-builder --win --publish always
+      - name: Package
+        run: pnpm exec electron-builder --win --publish never
+
+      # One step creates the release with every file. Letting electron-builder
+      # publish both targets in parallel can create two releases for one tag.
+      # latest.yml and the blockmap are what the auto-updater reads.
+      - name: Publish the release
+        shell: bash
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          notes=".github/release-notes/${GITHUB_REF_NAME}.md"
+          if [ -f "$notes" ]; then body=(--notes-file "$notes"); else body=(--generate-notes); fi
+          files=(release/Duthris-DPI-Setup-*.exe release/Duthris-DPI-Setup-*.exe.blockmap release/Duthris-DPI-Portable-*.exe release/latest.yml)
+          gh release create "$GITHUB_REF_NAME" "${files[@]}" --title "Duthris DPI ${GITHUB_REF_NAME#v}" "${body[@]}"
