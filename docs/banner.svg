@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 400" width="1280" height="400">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#140c26"/>
+      <stop offset="0.55" stop-color="#0b0911"/>
+      <stop offset="1" stop-color="#1a0f33"/>
+    </linearGradient>
+    <radialGradient id="glow1" cx="0.22" cy="0.5" r="0.45">
+      <stop offset="0" stop-color="#7c4dff" stop-opacity="0.55"/>
+      <stop offset="1" stop-color="#7c4dff" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glow2" cx="0.85" cy="0.1" r="0.5">
+      <stop offset="0" stop-color="#4f46e5" stop-opacity="0.35"/>
+      <stop offset="1" stop-color="#4f46e5" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="title" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#d4c8ff"/>
+      <stop offset="0.5" stop-color="#9c81f9"/>
+      <stop offset="1" stop-color="#6b6cf0"/>
+    </linearGradient>
+    <linearGradient id="icon" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#9C81F9"/>
+      <stop offset="0.5" stop-color="#6833E6"/>
+      <stop offset="1" stop-color="#3A1F7A"/>
+    </linearGradient>
+    <linearGradient id="shine" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fff" stop-opacity="0.22"/>
+      <stop offset="0.5" stop-color="#fff" stop-opacity="0"/>
+    </linearGradient>
+    <filter id="soft" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="22"/>
+    </filter>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M40 0H0V40" fill="none" stroke="#ffffff" stroke-opacity="0.035" stroke-width="1"/>
+    </pattern>
+  </defs>
+
+  <rect width="1280" height="400" rx="28" fill="url(#bg)"/>
+  <rect width="1280" height="400" rx="28" fill="url(#grid)"/>
+  <rect width="1280" height="400" rx="28" fill="url(#glow1)"/>
+  <rect width="1280" height="400" rx="28" fill="url(#glow2)"/>
+
+  <!-- Packets slipping through the wall. -->
+  <g stroke-linecap="round" fill="none">
+    <path d="M820 330 C 960 330, 1040 290, 1250 290" stroke="#9c81f9" stroke-opacity="0.22" stroke-width="2"/>
+    <path d="M840 355 C 980 355, 1080 335, 1250 335" stroke="#6b6cf0" stroke-opacity="0.16" stroke-width="2"/>
+    <path d="M1060 300 C 1120 300, 1160 250, 1250 250" stroke="#d4c8ff" stroke-opacity="0.12" stroke-width="2"/>
+  </g>
+  <g fill="#b9a6ff">
+    <circle cx="960" cy="324" r="4" fill-opacity="0.9"/>
+    <circle cx="1120" cy="294" r="3" fill-opacity="0.6"/>
+    <circle cx="1060" cy="341" r="4" fill-opacity="0.8"/>
+    <circle cx="1190" cy="254" r="3" fill-opacity="0.7"/>
+  </g>
+
+  <!-- App icon. -->
+  <g transform="translate(96 88)">
+    <rect x="18" y="30" width="224" height="224" rx="58" fill="#7c4dff" opacity="0.55" filter="url(#soft)"/>
+    <rect x="8" y="8" width="240" height="240" rx="60" fill="url(#icon)"/>
+    <rect x="8" y="8" width="240" height="240" rx="60" fill="url(#shine)"/>
+    <rect x="112" y="46" width="24" height="62" rx="12" fill="#fff" fill-opacity="0.5"/>
+    <rect x="112" y="148" width="24" height="62" rx="12" fill="#fff" fill-opacity="0.5"/>
+    <path d="M54 128 H188" stroke="#fff" stroke-width="24" stroke-linecap="round"/>
+    <path d="M158 92 L196 128 L158 164" fill="none" stroke="#fff" stroke-width="24" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+
+  <g font-family="Inter, 'Segoe UI Variable Display', 'Segoe UI', system-ui, -apple-system, sans-serif">
+    <text x="410" y="178" font-size="88" font-weight="800" letter-spacing="-3" fill="url(#title)">Duthris DPI</text>
+    <text x="414" y="232" font-size="30" font-weight="500" fill="#c9c2e6">One click. It finds what works on your network.</text>
+    <text x="414" y="272" font-size="24" font-weight="400" fill="#8f86ad">Tek tık. Ağınızda neyin çalıştığını kendisi bulur.</text>
+
+    <g transform="translate(414 308)" font-size="17" font-weight="600">
+      <rect width="118" height="34" rx="17" fill="#7c4dff" fill-opacity="0.18" stroke="#9c81f9" stroke-opacity="0.45"/>
+      <text x="59" y="23" text-anchor="middle" fill="#d4c8ff">Windows</text>
+      <rect x="130" width="132" height="34" rx="17" fill="#10b981" fill-opacity="0.14" stroke="#34d399" stroke-opacity="0.45"/>
+      <text x="196" y="23" text-anchor="middle" fill="#a7f3d0">Open source</text>
+      <rect x="274" width="96" height="34" rx="17" fill="#f59e0b" fill-opacity="0.14" stroke="#fbbf24" stroke-opacity="0.45"/>
+      <text x="322" y="23" text-anchor="middle" fill="#fde68a">EN · TR</text>
+    </g>
+  </g>
+</svg>

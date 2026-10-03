@@ -1,0 +1,48 @@
+name: Release
+
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: write
+
+jobs:
+  windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      - name: Check the tag matches the package version
+        shell: bash
+        run: |
+          tag="${GITHUB_REF_NAME#v}"
+          pkg="$(node -p "require('./package.json').version")"
+          if [ "$tag" != "$pkg" ]; then
+            echo "Tag $GITHUB_REF_NAME does not match package version $pkg" >&2
+            exit 1
+          fi
+
+      # The engine is downloaded from the pinned zapret release and its checksum
+      # verified, so what ships can be compared byte for byte with upstream.
+      - name: Fetch the engine
+        run: pnpm run engine
+
+      - name: Typecheck, lint and build
+        run: pnpm run verify
+
+      # Uploads the installer, the portable exe and latest.yml (read by the
+      # auto-updater) to the release for this tag.
+      - name: Package and publish
+        run: pnpm exec electron-builder --win --publish always
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

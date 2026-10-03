@@ -1,0 +1,9 @@
+# electron: the install script downloads the Electron binary for this platform.
+# esbuild: the install script fetches the platform-specific esbuild binary.
+# sharp: only used by scripts/generate-icons.mjs.
+# electron-winstaller: Squirrel installer support, unused (we ship NSIS).
+allowBuilds:
+  electron: true
+  electron-winstaller: false
+  esbuild: true
+  sharp: true

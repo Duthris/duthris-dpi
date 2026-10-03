@@ -1,0 +1,12 @@
+node_modules/
+out/
+release/
+.vite/
+*.log
+.DS_Store
+Thumbs.db
+
+# Engine binaries are downloaded from upstream releases and checksum-verified
+# by `pnpm engine`. They are never committed.
+resources/engine/
+.cache/

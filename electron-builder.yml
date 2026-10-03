@@ -1,0 +1,56 @@
+appId: com.duthris.dpi
+productName: Duthris DPI
+copyright: Copyright © 2026 Duthris
+
+directories:
+  output: release
+  buildResources: build
+
+files:
+  - out/**/*
+  - package.json
+  - "!**/*.map"
+
+extraResources:
+  - from: resources/engine
+    to: engine
+  - from: resources/icons
+    to: icons
+    filter: ["*.png", "*.ico"]
+  - from: resources/licenses
+    to: licenses
+
+asar: true
+
+win:
+  target:
+    - target: nsis
+      arch: [x64]
+    - target: portable
+      arch: [x64]
+  icon: build/icon.ico
+  # WinDivert needs administrator rights; the manifest asks once at launch
+  # instead of failing later.
+  requestedExecutionLevel: requireAdministrator
+  artifactName: Duthris-DPI-${version}-${arch}.${ext}
+
+nsis:
+  oneClick: false
+  perMachine: true
+  allowToChangeInstallationDirectory: true
+  createDesktopShortcut: true
+  createStartMenuShortcut: true
+  shortcutName: Duthris DPI
+  artifactName: Duthris-DPI-Setup-${version}.${ext}
+
+portable:
+  artifactName: Duthris-DPI-Portable-${version}.${ext}
+
+# Releases and the auto-updater both live on GitHub. The release workflow runs
+# electron-builder with --publish always; local builds use --publish never.
+publish:
+  provider: github
+  owner: Duthris
+  repo: duthris-dpi
+  # Publish straight to a visible release; the default leaves it as a draft.
+  releaseType: release
